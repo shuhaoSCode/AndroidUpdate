@@ -14,7 +14,7 @@
   
           dependencies {
 	        compile 'com.github.shuhaoSCode:AndroidBeatUpdate:-SNAPSHOT'
-	}
+	  }
   
 * eclipse。。。请自行copy class。
 
