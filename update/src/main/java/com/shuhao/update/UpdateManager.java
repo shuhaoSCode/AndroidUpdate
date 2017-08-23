@@ -21,6 +21,9 @@ import static android.content.ContentValues.TAG;
 
 public class UpdateManager {
 
+
+    private DownloadInProgressLintener downloadInProgressLintener;
+
     private static UpdateManager instance;
 
     private boolean isOpenApk = false;
@@ -34,7 +37,7 @@ public class UpdateManager {
         return instance;
     }
 
-    private UpdateManager(Context context){
+    private UpdateManager(Context context) {
         this.context = context;
     }
 
@@ -47,7 +50,7 @@ public class UpdateManager {
 
             @Override
             public void onResponse(File response, int id) {
-                if(isOpenApk){
+                if (isOpenApk) {
                     openFile(Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + apkName);
                 }
                 Log.e(TAG, "download succ");
@@ -55,13 +58,13 @@ public class UpdateManager {
 
             @Override
             public void inProgress(float progress, long total, int id) {
-                Log.e(TAG, "downloadInProgress: " + (int) (100 * progress));
+                downloadInProgressLintener.inProgress((int) (100 * progress));
             }
         });
         return getInstance(context);
     }
 
-    private void openFile(String fileName) {
+    private UpdateManager openFile(String fileName) {
         File file = new File(fileName);
         // TODO Auto-generated method stub
         Log.e("OpenFile", file.getName());
@@ -71,11 +74,21 @@ public class UpdateManager {
         intent.setDataAndType(Uri.fromFile(file),
                 "application/vnd.android.package-archive");
         context.startActivity(intent);
+        return getInstance(context);
     }
 
-    public void isOpenApk(boolean isOpenApk) {
+    public UpdateManager isOpenApk(boolean isOpenApk) {
         this.isOpenApk = isOpenApk;
+        return getInstance(context);
     }
 
+    public UpdateManager setDownloadInProgessLintener(DownloadInProgressLintener downloadInProgessLintener) {
+        this.downloadInProgressLintener = downloadInProgessLintener;
+        return getInstance(context);
+    }
+
+    public interface DownloadInProgressLintener {
+        void inProgress(int progress);
+    }
 
 }
