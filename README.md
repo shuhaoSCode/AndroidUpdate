@@ -5,18 +5,16 @@
 
 * Android Studio
 
-          ```
           allprojects {
             repositories {
               ...
               maven { url 'https://jitpack.io' }
             }
           }
-          ```
   
-          ```
-          compile 'com.github.shuhaoSCode:AndroidBeatUpdate:-SNAPSHOT'
-          ```
+          dependencies {
+	        compile 'com.github.shuhaoSCode:AndroidBeatUpdate:-SNAPSHOT'
+	}
   
 * eclipse。。。请自行copy class。
 
