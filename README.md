@@ -43,7 +43,7 @@
 	```
 	UpdateManager.downloadApk("下载链接", "想要保存的名称.apk")
 	```
-* 下载完成后是否打开（默认false 不打开）
+* 下载完成后是否直接安装（默认false 不打开）
 
 	```
 	UpdateManager.isOpenApk(true) 
