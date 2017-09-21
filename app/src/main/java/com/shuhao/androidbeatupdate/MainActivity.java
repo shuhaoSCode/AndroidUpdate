@@ -14,10 +14,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        UpdateManager.getInstance(this).downloadApk("http://app.appyunpan.com//yyhmobile//yyhmobile-d.apk", "test.apk").isOpenApk(true).setDownloadInProgessLintener(new UpdateManager.DownloadInProgressLintener() {
+        UpdateManager.getInstance(this).downloadApk("http://app.appyunpan.com//yyhmobile//yyhmobile-d.apk", "test.apk").isOpenApk(true).setDownloadInProgessLintener(new UpdateManager.DownloadLintener() {
             @Override
             public void inProgress(int progress) {
-                Log.e(TAG, "downloadInProgress: " + progress);
+
+            }
+
+            @Override
+            public void OnSuccess(String succ) {
+
             }
         });
     }

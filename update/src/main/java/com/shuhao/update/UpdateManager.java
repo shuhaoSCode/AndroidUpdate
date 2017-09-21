@@ -22,7 +22,7 @@ import static android.content.ContentValues.TAG;
 public class UpdateManager {
 
 
-    private DownloadInProgressLintener downloadInProgressLintener;
+    private DownloadLintener downloadLintener;
 
     private static UpdateManager instance;
 
@@ -58,7 +58,7 @@ public class UpdateManager {
 
             @Override
             public void inProgress(float progress, long total, int id) {
-                downloadInProgressLintener.inProgress((int) (100 * progress));
+                downloadLintener.inProgress((int) (100 * progress));
             }
         });
         return getInstance(context);
@@ -82,13 +82,14 @@ public class UpdateManager {
         return getInstance(context);
     }
 
-    public UpdateManager setDownloadInProgessLintener(DownloadInProgressLintener downloadInProgessLintener) {
-        this.downloadInProgressLintener = downloadInProgessLintener;
+    public UpdateManager setDownloadInProgessLintener(DownloadLintener downloadLintener) {
+        this.downloadLintener = downloadLintener;
         return getInstance(context);
     }
 
-    public interface DownloadInProgressLintener {
+    public interface DownloadLintener {
         void inProgress(int progress);
+        void OnSuccess(String file);
     }
 
 }
